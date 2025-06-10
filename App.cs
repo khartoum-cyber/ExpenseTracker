@@ -5,17 +5,46 @@
         public void Run()
         {
             var isRunning = true;
+            var expenseList = new List<string>();
 
-            Console.Write("Enter command: ");
-            var command = Console.ReadLine() ?? string.Empty;
 
             while (isRunning)
             {
-                isRunning = command switch
+                Console.Write("Enter command: ");
+                var command = Console.ReadLine() ?? string.Empty;
+                
+                switch (command)
                 {
-                    "exit" => false,
-                    _ => isRunning
-                };
+                    case "add":
+                        Add();
+                        break;
+
+                    case "exit":
+                        isRunning = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Unknown command. Try 'add' or 'exit'.");
+                        break;
+                }
+            }
+
+            return;
+
+            void Add()
+            {
+                Console.Write("Enter expense to add: ");
+                var expense = Console.ReadLine() ?? string.Empty;
+
+                expenseList.Add(expense);
+
+                Console.Write("Your expenses :");
+                foreach (var element in expenseList)
+                {
+                    Console.Write(element);
+                }
+
+                Console.WriteLine();
             }
         }
     }

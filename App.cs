@@ -1,6 +1,4 @@
 ﻿
-using System.Text.RegularExpressions;
-
 namespace ExpenseTracker
 {
     internal class App
@@ -15,7 +13,8 @@ namespace ExpenseTracker
             {
                 Console.Write("Enter command: ");
                 var input = Console.ReadLine() ?? string.Empty;
-                commands = InputParser(input);
+
+                commands = Utility.Utility.InputParser(input);
                 var command = commands.FirstOrDefault();
 
                 switch (command)
@@ -33,9 +32,6 @@ namespace ExpenseTracker
                         break;
                 }
             }
-
-            return;
-
             void Add()
             {
                 Console.Write("Enter expense to add: ");
@@ -51,22 +47,6 @@ namespace ExpenseTracker
 
                 Console.WriteLine();
             }
-        }
-
-        private static List<string> InputParser(string input)
-        {
-            var commandArgs = new List<string>();
-
-            var matches = Regex.Matches(input, @"(?<match>[\""'])(?<value>.*?)(?<!\\)\k<match>|(?<value>[^ ]+)");
-
-            foreach (Match match in matches)
-            {
-                // Remove surrounding quotes if any
-                var value = match.Value.Trim('"');
-                commandArgs.Add(value);
-            }
-
-            return commandArgs;
         }
     }
 }

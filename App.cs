@@ -4,7 +4,19 @@
     {
         public void Run()
         {
-            Console.WriteLine("Hello World!");
+            var isRunning = true;
+
+            Console.Write("Enter command: ");
+            var command = Console.ReadLine() ?? string.Empty;
+
+            while (isRunning)
+            {
+                isRunning = command switch
+                {
+                    "exit" => false,
+                    _ => isRunning
+                };
+            }
         }
     }
 }

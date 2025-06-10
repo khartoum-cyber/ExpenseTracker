@@ -7,6 +7,7 @@ namespace ExpenseTracker
     {
         static void Main(string[] args)
         {
+            //instance of IHost, implements IDisposable
             using IHost host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices(services =>
                 {

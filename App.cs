@@ -71,8 +71,8 @@ namespace ExpenseTracker
             if (!validInput)
             {
 
-                Helper.PrintErrorMessage("Wrong command! Try again.");
-                Helper.PrintInfoMessage("Type \"help\" to know the set of commands");
+                Utility.Utility.PrintErrorMessage("Wrong command! Try again.");
+                Utility.Utility.PrintInfoMessage("Type \"help\" to know the set of commands");
                 return false;
             }
 

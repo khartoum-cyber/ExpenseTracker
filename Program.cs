@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ExpenseTracker.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace ExpenseTracker
@@ -11,6 +12,7 @@ namespace ExpenseTracker
             using IHost host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices(services =>
                 {
+                    services.AddTransient<IExpenseService, ExpenseService>();
                     services.AddTransient<App>(); // Register your App class
                 })
                 .Build();

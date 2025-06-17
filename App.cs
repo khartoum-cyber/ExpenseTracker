@@ -1,8 +1,10 @@
 ﻿
 
+using ExpenseTracker.Services;
+
 namespace ExpenseTracker
 {
-    internal class App
+    internal class App(IExpenseService expenseService)
     {
         public void Run()
         {
@@ -35,8 +37,9 @@ namespace ExpenseTracker
             }
             void Add()
             {
-                if (!IsUserInputValid(commands, 2))
+                if (!IsUserInputValid(commands, 3))
                     return;
+                var task = expenseService.Add(commands[1], Convert.ToInt32(commands[2]));
             }
         }
 

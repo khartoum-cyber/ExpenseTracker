@@ -16,7 +16,7 @@ namespace ExpenseTracker.Utility
 
             Console.WriteLine();
             Console.WriteLine("===================================");
-            Console.WriteLine("❌ ERROR:");
+            Console.WriteLine("ERROR:");
             Console.WriteLine(message);
             Console.WriteLine("===================================");
             Console.WriteLine();

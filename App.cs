@@ -44,6 +44,12 @@ namespace ExpenseTracker
                 if (!IsUserInputValid(commands, 4))
                     return;
 
+                if (!commands[1].Contains("\"") || !commands[3].Contains("\""))
+                {
+                    Utility.Utility.PrintErrorMessage("Description and/or category must be in double quotes \"your description\" \"your category\"");
+                    return;
+                }
+
                 var taskId = expenseService.Add(commands[1], Convert.ToDouble(commands[2]), commands[3]);
 
                 if (taskId == 0)

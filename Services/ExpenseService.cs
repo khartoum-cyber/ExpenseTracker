@@ -27,6 +27,11 @@ namespace ExpenseTracker.Services
             }
         }
 
+        public List<Expense> GetAllExpenses()
+        {
+            return expenseList;
+        }
+
         private int GetId()
         {
             if (expenseList.Count == 0)

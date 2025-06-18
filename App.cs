@@ -26,6 +26,10 @@ namespace ExpenseTracker
                         Add();
                         break;
 
+                    case "list":
+                        ListAll();
+                        break;
+
                     case "exit":
                         isRunning = false;
                         break;
@@ -49,6 +53,19 @@ namespace ExpenseTracker
                 else
                 {
                     Utility.Utility.PrintInfoMessage($"Expense added successfully (ID : {taskId})");
+                }
+            }
+
+            void ListAll()
+            {
+                if (!IsUserInputValid(commands, 1))
+                    return;
+
+                var expenses = expenseService.GetAllExpenses();
+
+                foreach (var element in expenses)
+                {
+                    Console.WriteLine($"Expense id : {element.Id}, expense description : {element.Description}, expense amount : {element.Amount}, expense category : {element.Category}");
                 }
             }
         }

@@ -39,7 +39,8 @@ namespace ExpenseTracker
             {
                 if (!IsUserInputValid(commands, 3))
                     return;
-                var task = expenseService.Add(commands[1], Convert.ToInt32(commands[2]));
+
+                var task = expenseService.Add(commands[1], Convert.ToDouble(commands[2]));
             }
         }
 

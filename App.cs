@@ -40,7 +40,16 @@ namespace ExpenseTracker
                 if (!IsUserInputValid(commands, 4))
                     return;
 
-                var task = expenseService.Add(commands[1], Convert.ToDouble(commands[2]), commands[3]);
+                var taskId = expenseService.Add(commands[1], Convert.ToDouble(commands[2]), commands[3]);
+
+                if (taskId == 0)
+                {
+                    Utility.Utility.PrintErrorMessage("Expense adding failed for some reason! Please try again...");
+                }
+                else
+                {
+                    Utility.Utility.PrintInfoMessage($"Expense added successfully (ID : {taskId})");
+                }
             }
         }
 

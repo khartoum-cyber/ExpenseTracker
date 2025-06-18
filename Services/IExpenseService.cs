@@ -2,6 +2,6 @@
 {
     internal interface IExpenseService
     {
-        string Add(string description, double amount);
+        string Add(string description, double amount, string category);
     }
 }

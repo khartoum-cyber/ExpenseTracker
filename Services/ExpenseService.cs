@@ -2,7 +2,7 @@
 {
     internal class ExpenseService : IExpenseService
     {
-        public string Add(string description, double amount)
+        public string Add(string description, double amount, string category)
         {
             throw new NotImplementedException();
         }

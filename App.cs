@@ -37,10 +37,10 @@ namespace ExpenseTracker
             }
             void Add()
             {
-                if (!IsUserInputValid(commands, 3))
+                if (!IsUserInputValid(commands, 4))
                     return;
 
-                var task = expenseService.Add(commands[1], Convert.ToDouble(commands[2]));
+                var task = expenseService.Add(commands[1], Convert.ToDouble(commands[2]), commands[3]);
             }
         }
 

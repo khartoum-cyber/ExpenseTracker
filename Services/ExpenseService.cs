@@ -44,10 +44,21 @@ namespace ExpenseTracker.Services
             }
         }
 
+
         //public List<Expense> GetAllExpenses()
         //{
         //    return expenseList;
         //}
+
+        private static List<Expense> GetAllExpensesFromFile()
+        {
+            List<Expense> fileExpenses = new List<Expense>();
+            var jsonData = File.ReadAllText(filePath);
+            if (!string.IsNullOrEmpty(jsonData))
+                fileExpenses = JsonSerializer.Deserialize<List<Expense>>(jsonData);
+
+            return fileExpenses ?? new List<Expense>();
+        }
 
         private static bool CheckAndCreateFile()
         {

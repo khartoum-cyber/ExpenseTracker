@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Model;
+﻿using System.Text.Json;
+using ExpenseTracker.Model;
 
 namespace ExpenseTracker.Services
 {
@@ -7,11 +8,12 @@ namespace ExpenseTracker.Services
         private static string fileName = "myExpenses.json";
         private static string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
 
-        List<Expense> expenseList = new();
         public int Add(string description, double amount, string category)
         {
             try
             {
+                List<Expense> expenseList = new();
+
                 Expense expense = new Expense()
                 {
                     Amount = amount,
@@ -21,10 +23,20 @@ namespace ExpenseTracker.Services
                     Category = category
                 };
 
-                //expenseList.Add(expense);
-                //return expense.Id;
-
                 var fileExists = CheckAndCreateFile();
+
+                if (fileExists)
+                {
+                    expenseList = GetAllExpensesFromFile();
+
+                    expenseList?.Add(expense);
+                    var updatedExpenseList = JsonSerializer.Serialize<List<Expense>>(expenseList);
+                    File.WriteAllText(filePath, updatedExpenseList);
+
+                    return expense.Id;
+                }
+
+                return 0;
             }
             catch (Exception e)
             {
@@ -32,10 +44,10 @@ namespace ExpenseTracker.Services
             }
         }
 
-        public List<Expense> GetAllExpenses()
-        {
-            return expenseList;
-        }
+        //public List<Expense> GetAllExpenses()
+        //{
+        //    return expenseList;
+        //}
 
         private static bool CheckAndCreateFile()
         {

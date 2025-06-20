@@ -84,12 +84,19 @@ namespace ExpenseTracker.Services
 
         private int GetId()
         {
-            if (expenseList.Count == 0)
+            if (!CheckIfFileExists())
                 return 1;
 
-            expenseList.OrderBy(x => x.Id);
-            var lastId = expenseList.Last().Id;
-            return lastId + 1;
+            var expensesFromFile = GetAllExpensesFromFile();
+
+            if (expensesFromFile?.Count > 0)
+            {
+                expensesFromFile.OrderBy(x => x.Id);
+                var lastId = expensesFromFile.Last().Id;
+                return lastId + 1;
+            }
+
+            return 0;
         }
     }
 }

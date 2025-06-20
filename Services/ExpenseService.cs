@@ -44,11 +44,16 @@ namespace ExpenseTracker.Services
             }
         }
 
+        public List<Expense> ListAllExpenses()
+        {
+            if (!CheckIfFileExists())
+            {
+                return new List<Expense>();
+            }
 
-        //public List<Expense> GetAllExpenses()
-        //{
-        //    return expenseList;
-        //}
+            var expensesFromFile = GetAllExpensesFromFile();
+            return expensesFromFile ?? new List<Expense>();
+        }
 
         private static List<Expense> GetAllExpensesFromFile()
         {

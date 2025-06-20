@@ -1,6 +1,4 @@
-﻿
-
-using ExpenseTracker.Services;
+﻿using ExpenseTracker.Services;
 using System;
 
 namespace ExpenseTracker
@@ -28,7 +26,7 @@ namespace ExpenseTracker
                         break;
 
                     case "list":
-                        //ListAll();
+                        ListAll();
                         break;
 
                     case "exit":
@@ -63,18 +61,18 @@ namespace ExpenseTracker
                 }
             }
 
-            //void ListAll()
-            //{
-            //    if (!IsUserInputValid(commands, 1))
-            //        return;
+            void ListAll()
+            {
+                if (!IsUserInputValid(commands, 1))
+                    return;
 
-            //    var expenses = expenseService.GetAllExpenses();
+                var expenses = expenseService.ListAllExpenses();
 
-            //    foreach (var element in expenses)
-            //    {
-            //        Console.WriteLine($"Expense id : {element.Id}, expense description : {element.Description}, expense amount : {element.Amount}, expense category : {element.Category}");
-            //    }
-            //}
+                foreach (var element in expenses)
+                {
+                    Console.WriteLine($"Expense id : {element.Id}, expense description : {element.Description}, expense amount : {element.Amount}, expense category : {element.Category}");
+                }
+            }
         }
 
         private bool IsUserInputValid(List<string> commands, int requiredParams)

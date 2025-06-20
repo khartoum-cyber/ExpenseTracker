@@ -4,6 +4,9 @@ namespace ExpenseTracker.Services
 {
     internal class ExpenseService : IExpenseService
     {
+        private static string fileName = "myExpenses.json";
+        private static string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+
         List<Expense> expenseList = new();
         public int Add(string description, double amount, string category)
         {
@@ -18,8 +21,10 @@ namespace ExpenseTracker.Services
                     Category = category
                 };
 
-                expenseList.Add(expense);
-                return expense.Id;
+                //expenseList.Add(expense);
+                //return expense.Id;
+
+                var fileExists = CheckAndCreateFile();
             }
             catch (Exception e)
             {
@@ -31,6 +36,28 @@ namespace ExpenseTracker.Services
         {
             return expenseList;
         }
+
+        private static bool CheckAndCreateFile()
+        {
+            try
+            {
+                var fileExists = CheckIfFileExists();
+
+                if (!fileExists)
+                {
+                    using FileStream fs = File.Create(filePath);
+                    Console.WriteLine($"File {fileName} created successfully.");
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        private static bool CheckIfFileExists() => File.Exists(filePath);
 
         private int GetId()
         {

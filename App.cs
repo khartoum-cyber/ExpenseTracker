@@ -14,7 +14,7 @@ namespace ExpenseTracker
 
             while (isRunning)
             {
-                Console.Write("Enter command: ");
+                Console.WriteLine("Enter command: ");
                 var input = Console.ReadLine() ?? string.Empty;
 
                 commands = Utility.Utility.InputParser(input);
@@ -50,15 +50,15 @@ namespace ExpenseTracker
                     return;
                 }
 
-                var taskId = expenseService.Add(commands[1], Convert.ToDouble(commands[2]), commands[3]);
+                var expenseId = expenseService.Add(commands[1], Convert.ToDouble(commands[2]), commands[3]);
 
-                if (taskId == 0)
+                if (expenseId == 0)
                 {
                     Utility.Utility.PrintErrorMessage("Expense adding failed for some reason! Please try again...");
                 }
                 else
                 {
-                    Utility.Utility.PrintInfoMessage($"Expense added successfully (ID : {taskId})");
+                    Utility.Utility.PrintInfoMessage($"Expense added successfully (ID : {expenseId})");
                 }
             }
 

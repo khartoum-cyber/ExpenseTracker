@@ -1,6 +1,7 @@
 ﻿
 
 using ExpenseTracker.Services;
+using System;
 
 namespace ExpenseTracker
 {
@@ -44,7 +45,13 @@ namespace ExpenseTracker
                 if (!IsUserInputValid(commands, 4))
                     return;
 
-                var expenseId = expenseService.Add(commands[1], Convert.ToDouble(commands[2]), commands[3]);
+                if (!double.TryParse(commands[2], out double amount))
+                {
+                    Utility.Utility.PrintErrorMessage("Invalid input. Not a valid amount.");
+                    return;
+                }
+
+                var expenseId = expenseService.Add(commands[1], amount, commands[3]);
 
                 if (expenseId == 0)
                 {

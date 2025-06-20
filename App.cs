@@ -14,7 +14,7 @@ namespace ExpenseTracker
 
             while (isRunning)
             {
-                Console.WriteLine("Enter command: ");
+                Console.Write("Enter command: ");
                 var input = Console.ReadLine() ?? string.Empty;
 
                 commands = Utility.Utility.InputParser(input);
@@ -27,7 +27,7 @@ namespace ExpenseTracker
                         break;
 
                     case "list":
-                        ListAll();
+                        //ListAll();
                         break;
 
                     case "exit":
@@ -44,12 +44,6 @@ namespace ExpenseTracker
                 if (!IsUserInputValid(commands, 4))
                     return;
 
-                if (!commands[1].Contains("\"") || !commands[3].Contains("\""))
-                {
-                    Utility.Utility.PrintErrorMessage("Description and/or category must be in double quotes \"your description\" \"your category\"");
-                    return;
-                }
-
                 var expenseId = expenseService.Add(commands[1], Convert.ToDouble(commands[2]), commands[3]);
 
                 if (expenseId == 0)
@@ -62,18 +56,18 @@ namespace ExpenseTracker
                 }
             }
 
-            void ListAll()
-            {
-                if (!IsUserInputValid(commands, 1))
-                    return;
+            //void ListAll()
+            //{
+            //    if (!IsUserInputValid(commands, 1))
+            //        return;
 
-                var expenses = expenseService.GetAllExpenses();
+            //    var expenses = expenseService.GetAllExpenses();
 
-                foreach (var element in expenses)
-                {
-                    Console.WriteLine($"Expense id : {element.Id}, expense description : {element.Description}, expense amount : {element.Amount}, expense category : {element.Category}");
-                }
-            }
+            //    foreach (var element in expenses)
+            //    {
+            //        Console.WriteLine($"Expense id : {element.Id}, expense description : {element.Description}, expense amount : {element.Amount}, expense category : {element.Category}");
+            //    }
+            //}
         }
 
         private bool IsUserInputValid(List<string> commands, int requiredParams)
@@ -99,6 +93,14 @@ namespace ExpenseTracker
             if (requiredParams == 3)
             {
                 if (commands.Count != requiredParams || string.IsNullOrEmpty(commands[1]) || string.IsNullOrEmpty(commands[2]))
+                {
+                    validInput = false;
+                }
+            }
+
+            if (requiredParams == 4)
+            {
+                if (commands.Count != requiredParams || string.IsNullOrEmpty(commands[1]) || string.IsNullOrEmpty(commands[2]) || string.IsNullOrEmpty(commands[3]))
                 {
                     validInput = false;
                 }

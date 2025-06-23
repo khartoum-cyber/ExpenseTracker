@@ -55,6 +55,14 @@ namespace ExpenseTracker.Services
             return expensesFromFile ?? new List<Expense>();
         }
 
+        public int UpdateExpense(int id)
+        {
+            if (!CheckIfFileExists())
+            {
+                Console.WriteLine("No expenses to update.");
+            }
+        }
+
         private static List<Expense> GetAllExpensesFromFile()
         {
             List<Expense> fileExpenses = new List<Expense>();
@@ -103,5 +111,6 @@ namespace ExpenseTracker.Services
 
             return 0;
         }
+
     }
 }

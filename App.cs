@@ -1,5 +1,4 @@
 ﻿using ExpenseTracker.Services;
-using System;
 
 namespace ExpenseTracker
 {
@@ -27,6 +26,10 @@ namespace ExpenseTracker
 
                     case "list":
                         ListAll();
+                        break;
+
+                    case "update":
+                        Update();
                         break;
 
                     case "exit":
@@ -73,7 +76,22 @@ namespace ExpenseTracker
                     Console.WriteLine($"Expense id : {element.Id}, expense description : {element.Description}, expense amount : {element.Amount}, expense category : {element.Category}");
                 }
             }
+
+            void Update()
+            {
+                if (!IsUserInputValid(commands, 2))
+                    return;
+
+                if (!int.TryParse(commands[1], out int id))
+                {
+                    Utility.Utility.PrintErrorMessage("Invalid input. Not a valid id.");
+                    return;
+                }
+
+                var updatedExpense = expenseService.UpdateExpense(id);
+            }
         }
+
 
         private bool IsUserInputValid(List<string> commands, int requiredParams)
         {

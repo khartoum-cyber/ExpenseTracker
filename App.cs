@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Services;
+﻿using ExpenseTracker.Model;
+using ExpenseTracker.Services;
 
 namespace ExpenseTracker
 {
@@ -79,16 +80,26 @@ namespace ExpenseTracker
 
             void Update()
             {
-                if (!IsUserInputValid(commands, 2))
+                if (!IsUserInputValid(commands, 3))
                     return;
 
-                if (!int.TryParse(commands[1], out int id))
+                if (!int.TryParse(commands[2], out int id))
                 {
                     Utility.Utility.PrintErrorMessage("Invalid input. Not a valid id.");
                     return;
                 }
 
-                var updatedExpense = expenseService.UpdateExpense(id);
+                var updatedExpenseId = expenseService.UpdateExpense(commands[1] ,id);
+
+                if (updatedExpenseId == 0)
+                {
+                    //todo warning messages collide
+                    Utility.Utility.PrintErrorMessage("Expense updating failed for some reason! Please try again...");
+                }
+                else
+                {
+                    Utility.Utility.PrintInfoMessage($"Expense updated successfully (ID : {updatedExpenseId})");
+                }
             }
         }
 

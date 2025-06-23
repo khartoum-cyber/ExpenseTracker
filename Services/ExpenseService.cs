@@ -52,15 +52,39 @@ namespace ExpenseTracker.Services
             }
 
             var expensesFromFile = GetAllExpensesFromFile();
-            return expensesFromFile ?? new List<Expense>();
+            return expensesFromFile;
         }
 
-        public int UpdateExpense(int id)
+        public int UpdateExpense(string description, int id)
         {
             if (!CheckIfFileExists())
             {
+                //todo warning messages collide
                 Console.WriteLine("No expenses to update.");
+                return 0;
             }
+
+            var expensesFromFile = GetAllExpensesFromFile();
+
+            if (expensesFromFile.Count > 0)
+            {
+                var expenseToBeUpdated = expensesFromFile.SingleOrDefault(x => x.Id == id);
+
+                if (expenseToBeUpdated != null)
+                {
+                    var updatedExpense = new Expense { Description = description, Id = id , Amount = expenseToBeUpdated.Amount, Category = expenseToBeUpdated.Category};
+
+                    expensesFromFile.Remove(expenseToBeUpdated);
+                    expensesFromFile.Add(updatedExpense);
+
+                    var updatedExpenseList = JsonSerializer.Serialize(expensesFromFile);
+                    File.WriteAllText(filePath, updatedExpenseList);
+
+                    return updatedExpense.Id;
+                }
+            }
+
+            return 0;
         }
 
         private static List<Expense> GetAllExpensesFromFile()

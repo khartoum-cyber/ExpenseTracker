@@ -134,8 +134,6 @@ namespace ExpenseTracker
             }
         }
 
-
-
         private bool IsUserInputValid(List<string> commands, int requiredParams)
         {
             bool validInput = true;

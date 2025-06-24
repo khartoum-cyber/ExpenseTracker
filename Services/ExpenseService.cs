@@ -48,10 +48,18 @@ namespace ExpenseTracker.Services
         {
             if (!CheckIfFileExists())
             {
+                Utility.Utility.PrintErrorMessage("No expense file found.");
                 return new List<Expense>();
             }
 
             var expensesFromFile = GetAllExpensesFromFile();
+
+            if (expensesFromFile.Count == 0)
+            {
+                Utility.Utility.PrintErrorMessage("Expense file is empty.");
+                return new List<Expense>();
+            }
+
             return expensesFromFile;
         }
 
@@ -59,7 +67,7 @@ namespace ExpenseTracker.Services
         {
             if (!CheckIfFileExists())
             {
-                Console.WriteLine("No expenses to update.");
+                Utility.Utility.PrintErrorMessage("No expenses to update.");
                 return 0;
             }
 
@@ -90,7 +98,7 @@ namespace ExpenseTracker.Services
         {
             if (!CheckIfFileExists())
             {
-                Console.WriteLine("No expenses to delete.");
+                Utility.Utility.PrintErrorMessage("No expenses to delete.");
                 return 0;
             }
 

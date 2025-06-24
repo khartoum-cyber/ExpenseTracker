@@ -86,6 +86,34 @@ namespace ExpenseTracker.Services
             return 0;
         }
 
+        public int DeleteExpense(int id)
+        {
+            if (!CheckIfFileExists())
+            {
+                Console.WriteLine("No expenses to delete.");
+                return 0;
+            }
+
+            var expensesFromFile = GetAllExpensesFromFile();
+
+            if (expensesFromFile.Count > 0)
+            {
+                var expenseToBeRemoved = expensesFromFile.SingleOrDefault(x => x.Id == id);
+
+                if (expenseToBeRemoved != null)
+                {
+                    expensesFromFile.Remove(expenseToBeRemoved);
+
+                    var updatedExpenseList = JsonSerializer.Serialize(expensesFromFile);
+                    File.WriteAllText(filePath, updatedExpenseList);
+
+                    return expenseToBeRemoved.Id;
+                }
+            }
+
+            return 0;
+        }
+
         private static List<Expense> GetAllExpensesFromFile()
         {
             List<Expense> fileExpenses = new List<Expense>();

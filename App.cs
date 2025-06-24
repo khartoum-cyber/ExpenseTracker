@@ -1,5 +1,4 @@
-﻿using ExpenseTracker.Model;
-using ExpenseTracker.Services;
+﻿using ExpenseTracker.Services;
 
 namespace ExpenseTracker
 {
@@ -31,6 +30,10 @@ namespace ExpenseTracker
 
                     case "update":
                         Update();
+                        break;
+
+                    case "delete":
+                        Delete();
                         break;
 
                     case "exit":
@@ -91,7 +94,7 @@ namespace ExpenseTracker
 
                 if (!double.TryParse(commands[3], out double amount))
                 {
-                    Utility.Utility.PrintErrorMessage("Invalid input. Not a valid id.");
+                    Utility.Utility.PrintErrorMessage("Invalid input. Not a valid amount.");
                     return;
                 }
 
@@ -106,7 +109,31 @@ namespace ExpenseTracker
                     Utility.Utility.PrintInfoMessage($"Expense updated successfully (ID : {updatedExpenseId})");
                 }
             }
+
+            void Delete()
+            {
+                if (!IsUserInputValid(commands, 2))
+                    return;
+
+                if (!int.TryParse(commands[1], out int id))
+                {
+                    Utility.Utility.PrintErrorMessage("Invalid input. Not a valid id.");
+                    return;
+                }
+
+                var deletedExpenseId = expenseService.DeleteExpense(id);
+
+                if (deletedExpenseId == 0)
+                {
+                    Utility.Utility.PrintErrorMessage("Expense deletion failed! Please try again...");
+                }
+                else
+                {
+                    Utility.Utility.PrintInfoMessage($"Expense deleted successfully (ID : {deletedExpenseId})");
+                }
+            }
         }
+
 
 
         private bool IsUserInputValid(List<string> commands, int requiredParams)

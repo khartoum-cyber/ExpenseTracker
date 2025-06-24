@@ -55,11 +55,10 @@ namespace ExpenseTracker.Services
             return expensesFromFile;
         }
 
-        public int UpdateExpense(string description, int id)
+        public int UpdateExpense(string description, int id, double amount)
         {
             if (!CheckIfFileExists())
             {
-                //todo warning messages collide
                 Console.WriteLine("No expenses to update.");
                 return 0;
             }
@@ -72,7 +71,7 @@ namespace ExpenseTracker.Services
 
                 if (expenseToBeUpdated != null)
                 {
-                    var updatedExpense = new Expense { Description = description, Id = id , Amount = expenseToBeUpdated.Amount, Category = expenseToBeUpdated.Category};
+                    var updatedExpense = new Expense { Description = description, Id = id , Amount = amount, Category = expenseToBeUpdated.Category};
 
                     expensesFromFile.Remove(expenseToBeUpdated);
                     expensesFromFile.Add(updatedExpense);

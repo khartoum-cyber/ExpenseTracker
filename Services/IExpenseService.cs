@@ -6,6 +6,6 @@ namespace ExpenseTracker.Services
     {
         int Add(string description, double amount, string category);
         List<Expense> ListAllExpenses();
-        int UpdateExpense(string description, int id);
+        int UpdateExpense(string description, int id, double amount);
     }
 }

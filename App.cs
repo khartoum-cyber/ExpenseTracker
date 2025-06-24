@@ -80,7 +80,7 @@ namespace ExpenseTracker
 
             void Update()
             {
-                if (!IsUserInputValid(commands, 3))
+                if (!IsUserInputValid(commands, 4))
                     return;
 
                 if (!int.TryParse(commands[2], out int id))
@@ -89,12 +89,17 @@ namespace ExpenseTracker
                     return;
                 }
 
-                var updatedExpenseId = expenseService.UpdateExpense(commands[1] ,id);
+                if (!double.TryParse(commands[3], out double amount))
+                {
+                    Utility.Utility.PrintErrorMessage("Invalid input. Not a valid id.");
+                    return;
+                }
+
+                var updatedExpenseId = expenseService.UpdateExpense(commands[1], id, amount);
 
                 if (updatedExpenseId == 0)
                 {
-                    //todo warning messages collide
-                    Utility.Utility.PrintErrorMessage("Expense updating failed for some reason! Please try again...");
+                    Utility.Utility.PrintErrorMessage("Expense updating failed! Please try again...");
                 }
                 else
                 {

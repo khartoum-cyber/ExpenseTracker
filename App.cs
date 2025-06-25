@@ -40,6 +40,10 @@ namespace ExpenseTracker
                         SumAll();
                         break;
 
+                    case "sum-month":
+                        SumMonth();
+                        break;
+
                     case "exit":
                         isRunning = false;
                         break;
@@ -145,6 +149,17 @@ namespace ExpenseTracker
                 var sumOfExpenses = expenseService.SumAll();
 
                 Utility.Utility.PrintInfoMessage($"Sum of all expenses : {sumOfExpenses}");
+            }
+
+            void SumMonth()
+            {
+                if (!IsUserInputValid(commands, 2))
+                    return;
+
+                int.TryParse(commands[1], out int month);
+
+                var result = expenseService.SumMonth(month);
+                var monthName = new DateTime(1, month, 1).ToString("MM-MM");
             }
         }
 

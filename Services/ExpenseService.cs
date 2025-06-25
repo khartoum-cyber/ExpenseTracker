@@ -136,6 +136,11 @@ namespace ExpenseTracker.Services
             return sumOfExpenses;
         }
 
+        public double SumMonth(int month)
+        {
+            throw new NotImplementedException();
+        }
+
         private static List<Expense> GetAllExpensesFromFile()
         {
             List<Expense> fileExpenses = new List<Expense>();

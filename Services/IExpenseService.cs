@@ -9,5 +9,6 @@ namespace ExpenseTracker.Services
         int UpdateExpense(string description, int id, double amount);
         int DeleteExpense(int id);
         double SumAll();
+        double SumMonth(int month);
     }
 }

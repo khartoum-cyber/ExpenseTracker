@@ -121,6 +121,20 @@ namespace ExpenseTracker.Services
 
             return 0;
         }
+        public double SumAll()
+        {
+            if (!CheckIfFileExists())
+            {
+                Utility.Utility.PrintErrorMessage("No expense file found.");
+                return 0;
+            }
+
+            var expensesFromFile = GetAllExpensesFromFile();
+
+            var sumOfExpenses = expensesFromFile.Select(e => e.Amount).Sum();
+
+            return sumOfExpenses;
+        }
 
         private static List<Expense> GetAllExpensesFromFile()
         {

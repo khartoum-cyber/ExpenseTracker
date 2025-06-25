@@ -8,5 +8,6 @@ namespace ExpenseTracker.Services
         List<Expense> ListAllExpenses();
         int UpdateExpense(string description, int id, double amount);
         int DeleteExpense(int id);
+        double SumAll();
     }
 }

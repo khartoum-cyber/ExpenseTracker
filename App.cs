@@ -36,6 +36,10 @@ namespace ExpenseTracker
                         Delete();
                         break;
 
+                    case "sum-all":
+                        SumAll();
+                        break;
+
                     case "exit":
                         isRunning = false;
                         break;
@@ -132,7 +136,18 @@ namespace ExpenseTracker
                     Utility.Utility.PrintInfoMessage($"Expense deleted successfully (ID : {deletedExpenseId})");
                 }
             }
+
+            void SumAll()
+            {
+                if (!IsUserInputValid(commands, 1))
+                    return;
+
+                var sumOfExpenses = expenseService.SumAll();
+
+                Utility.Utility.PrintInfoMessage($"Sum of all expenses : {sumOfExpenses}");
+            }
         }
+
 
         private bool IsUserInputValid(List<string> commands, int requiredParams)
         {

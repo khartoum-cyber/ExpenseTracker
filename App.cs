@@ -160,6 +160,10 @@ namespace ExpenseTracker
 
                 var result = expenseService.SumMonth(month);
                 var monthName = new DateTime(1, month, 1).ToString("MM-MM");
+
+                Utility.Utility.PrintInfoMessage(result != 0
+                    ? $"Total expenses for the {monthName} month : ${result}"
+                    : "Total expenses: $0");
             }
         }
 

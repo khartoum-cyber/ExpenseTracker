@@ -138,7 +138,18 @@ namespace ExpenseTracker.Services
 
         public double SumMonth(int month)
         {
-            throw new NotImplementedException();
+            if (!CheckIfFileExists())
+                return 0;
+
+            var expensesFromFile = GetAllExpensesFromFile();
+
+            if (expensesFromFile.Count > 0)
+            {
+                var sum = expensesFromFile.Where(e => e.CreatedAt.Month == month).Sum(x => x.Amount);
+                return sum;
+            }
+
+            return 0;
         }
 
         private static List<Expense> GetAllExpensesFromFile()

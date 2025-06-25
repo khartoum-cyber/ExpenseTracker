@@ -159,10 +159,10 @@ namespace ExpenseTracker
                 int.TryParse(commands[1], out int month);
 
                 var result = expenseService.SumMonth(month);
-                var monthName = new DateTime(1, month, 1).ToString("MM-MM");
+                var monthName = new DateTime(1, month, 1).ToString("MMMM");
 
                 Utility.Utility.PrintInfoMessage(result != 0
-                    ? $"Total expenses for the {monthName} month : ${result}"
+                    ? $"Total expenses for {monthName} : ${result}"
                     : "Total expenses: $0");
             }
         }

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using ExpenseTracker.Enums;
 using ExpenseTracker.Model;
 
 namespace ExpenseTracker.Services
@@ -20,7 +21,7 @@ namespace ExpenseTracker.Services
                     CreatedAt = DateTime.Now,
                     Description = description,
                     Id = GetId(),
-                    Category = category
+                    Category = Categories.General
                 };
 
                 var fileExists = CheckAndCreateFile();

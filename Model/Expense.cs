@@ -1,4 +1,6 @@
-﻿namespace ExpenseTracker.Model
+﻿using ExpenseTracker.Enums;
+
+namespace ExpenseTracker.Model
 {
     internal class Expense
     {
@@ -6,7 +8,7 @@
 
         public string Description { get; set; } = string.Empty;
 
-        public string Category { get; set; } = string.Empty;
+        public Categories Category { get; set; } = Categories.General;
 
         public DateTime CreatedAt { get; set; }
 

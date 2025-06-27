@@ -155,7 +155,16 @@ namespace ExpenseTracker.Services
 
         public List<string> GetHelpCommandsList()
         {
-            throw new NotImplementedException();
+            return new List<string>
+            {
+                "add \"description\" $amount \"CategoryName\"",
+                "list",
+                "sum-all",
+                "sum-month monthNumber",
+                "delete id",
+                "exit",
+                "help"
+            };
         }
 
         private static List<Expense> GetAllExpensesFromFile()

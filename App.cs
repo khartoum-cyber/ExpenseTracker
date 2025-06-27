@@ -48,8 +48,12 @@ namespace ExpenseTracker
                         isRunning = false;
                         break;
 
+                    case "help":
+                        ShowHelp();
+                        break;
+
                     default:
-                        Console.WriteLine("Unknown command. Try 'add' or 'exit'.");
+                        Console.WriteLine("Unknown command. Try 'help' or 'exit'.");
                         break;
                 }
             }
@@ -165,7 +169,22 @@ namespace ExpenseTracker
                     ? $"Total expenses for {monthName} : ${result}"
                     : "Total expenses: $0");
             }
+
+            void ShowHelp()
+            {
+                var helpInfo = expenseService.GetHelpCommandsList();
+                int count = 1;
+                if (helpInfo != null && helpInfo.Count > 0)
+                {
+                    foreach (var item in helpInfo)
+                    {
+                        Utility.Utility.PrintHelpMessage(item, count);
+                        count++;
+                    }
+                }
+            }
         }
+
 
 
         private bool IsUserInputValid(List<string> commands, int requiredParams)

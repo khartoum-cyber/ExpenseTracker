@@ -153,6 +153,11 @@ namespace ExpenseTracker.Services
             return 0;
         }
 
+        public List<string> GetHelpCommandsList()
+        {
+            throw new NotImplementedException();
+        }
+
         private static List<Expense> GetAllExpensesFromFile()
         {
             List<Expense> fileExpenses = new List<Expense>();

@@ -21,7 +21,7 @@ namespace ExpenseTracker.Services
                     CreatedAt = DateTime.Now,
                     Description = description,
                     Id = GetId(),
-                    Category = Categories.General
+                    Category = Enum.TryParse(category, out Categories cat) ? cat : throw new Exception("Category not found")
                 };
 
                 var fileExists = CheckAndCreateFile();

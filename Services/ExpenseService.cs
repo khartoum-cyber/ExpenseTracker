@@ -153,6 +153,11 @@ namespace ExpenseTracker.Services
             return 0;
         }
 
+        public List<Expense> ShowCategory(string category)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<string> GetHelpCommandsList()
         {
             return new List<string>
@@ -162,6 +167,7 @@ namespace ExpenseTracker.Services
                 "sum-all",
                 "sum-month monthNumber",
                 "delete id",
+                "clear",
                 "exit",
                 "help",
                 "available categories - \"Hardware\" \"Education\" \"Savings\" \"Investments\" \"General\""

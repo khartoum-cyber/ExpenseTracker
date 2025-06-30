@@ -1,5 +1,4 @@
-﻿using System.Data;
-using ExpenseTracker.Services;
+﻿using ExpenseTracker.Services;
 
 namespace ExpenseTracker
 {
@@ -43,6 +42,10 @@ namespace ExpenseTracker
 
                     case "sum-month":
                         SumMonth();
+                        break;
+
+                    case "show-category":
+                        ShowCategory();
                         break;
 
                     case "clear":
@@ -189,6 +192,14 @@ namespace ExpenseTracker
                 }
 
                 Console.WriteLine();
+            }
+
+            void ShowCategory()
+            {
+                if (!IsUserInputValid(commands, 2))
+                    return;
+
+                var category = expenseService.ShowCategory(commands[1]);
             }
 
             void Clear() => Console.Clear();

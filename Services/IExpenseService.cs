@@ -10,6 +10,7 @@ namespace ExpenseTracker.Services
         int DeleteExpense(int id);
         double SumAll();
         double SumMonth(int month);
+        List<Expense> ShowCategory(string category);
         List<string> GetHelpCommandsList();
     }
 }

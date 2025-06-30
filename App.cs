@@ -72,7 +72,7 @@ namespace ExpenseTracker
 
                 if (expenseId == 0)
                 {
-                    Utility.Utility.PrintErrorMessage("Expense adding failed for some reason! Please try again...");
+                    Utility.Utility.PrintErrorMessage("Expense adding failed for some reason - category can be misspelled! Please try again...");
                 }
                 else
                 {
@@ -184,8 +184,6 @@ namespace ExpenseTracker
                 }
             }
         }
-
-
 
         private bool IsUserInputValid(List<string> commands, int requiredParams)
         {

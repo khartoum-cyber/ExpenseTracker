@@ -163,7 +163,8 @@ namespace ExpenseTracker.Services
                 "sum-month monthNumber",
                 "delete id",
                 "exit",
-                "help"
+                "help",
+                "available categories - \"Hardware\" \"Education\" \"Savings\" \"Investments\" \"General\""
             };
         }
 

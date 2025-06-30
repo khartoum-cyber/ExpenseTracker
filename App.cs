@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Services;
+﻿using System.Data;
+using ExpenseTracker.Services;
 
 namespace ExpenseTracker
 {
@@ -42,6 +43,10 @@ namespace ExpenseTracker
 
                     case "sum-month":
                         SumMonth();
+                        break;
+
+                    case "clear":
+                        Clear();
                         break;
 
                     case "exit":
@@ -182,7 +187,11 @@ namespace ExpenseTracker
                         count++;
                     }
                 }
+
+                Console.WriteLine();
             }
+
+            void Clear() => Console.Clear();
         }
 
         private bool IsUserInputValid(List<string> commands, int requiredParams)

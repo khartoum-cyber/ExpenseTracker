@@ -2,7 +2,7 @@
 
 namespace ExpenseTracker.Model
 {
-    internal class Expense
+    public class Expense
     {
         public int Id { get; set; }
 

@@ -96,10 +96,9 @@ namespace ExpenseTracker
 
                 var expenses = expenseService.ListAllExpenses();
 
-                foreach (var element in expenses)
-                {
-                    Console.WriteLine($"Expense id : {element.Id}, expense description : {element.Description}, expense amount : {element.Amount}, expense category : {element.Category}");
-                }
+                Utility.Utility.CreateExpenseTable(expenses);
+
+                Console.WriteLine();
             }
 
             void Update()
@@ -202,10 +201,7 @@ namespace ExpenseTracker
 
                 var categoryList = expenseService.ShowCategory(commands[1]);
 
-                foreach (var element in categoryList)
-                {
-                    Console.WriteLine($"Expense id : {element.Id}, expense description : {element.Description}, expense amount : {element.Amount}, expense category : {element.Category}");
-                }
+                Utility.Utility.CreateExpenseTable(categoryList);
 
                 Console.WriteLine();
             }

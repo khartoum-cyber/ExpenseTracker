@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Services;
+﻿using ExpenseTracker.Model;
+using ExpenseTracker.Services;
 
 namespace ExpenseTracker
 {
@@ -199,7 +200,14 @@ namespace ExpenseTracker
                 if (!IsUserInputValid(commands, 2))
                     return;
 
-                var category = expenseService.ShowCategory(commands[1]);
+                var categoryList = expenseService.ShowCategory(commands[1]);
+
+                foreach (var element in categoryList)
+                {
+                    Console.WriteLine($"Expense id : {element.Id}, expense description : {element.Description}, expense amount : {element.Amount}, expense category : {element.Category}");
+                }
+
+                Console.WriteLine();
             }
 
             void Clear() => Console.Clear();

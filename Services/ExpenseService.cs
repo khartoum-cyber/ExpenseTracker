@@ -155,7 +155,22 @@ namespace ExpenseTracker.Services
 
         public List<Expense> ShowCategory(string category)
         {
-            throw new NotImplementedException();
+            if (!CheckIfFileExists())
+            {
+                Utility.Utility.PrintErrorMessage("No expense file found.");
+                return new List<Expense>();
+            }
+
+            var expensesFromFile = GetAllExpensesFromFile();
+
+            if (expensesFromFile.Count > 0)
+            {
+                var categoryList = expensesFromFile.Where(e => e.Category.ToString() == category);
+                return categoryList.ToList();
+            }
+
+            Utility.Utility.PrintErrorMessage("Expense file is empty.");
+            return new List<Expense>();
         }
 
         public List<string> GetHelpCommandsList()

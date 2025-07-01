@@ -30,7 +30,7 @@ namespace ExpenseTracker.Services
                 {
                     expenseList = GetAllExpensesFromFile();
 
-                    expenseList?.Add(expense);
+                    expenseList.Add(expense);
                     var updatedExpenseList = JsonSerializer.Serialize<List<Expense>>(expenseList);
                     File.WriteAllText(filePath, updatedExpenseList);
 
@@ -39,7 +39,7 @@ namespace ExpenseTracker.Services
 
                 return 0;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return 0;
             }
@@ -191,7 +191,7 @@ namespace ExpenseTracker.Services
 
         private static List<Expense> GetAllExpensesFromFile()
         {
-            List<Expense> fileExpenses = new List<Expense>();
+            List<Expense>? fileExpenses = new List<Expense>();
             var jsonData = File.ReadAllText(filePath);
             if (!string.IsNullOrEmpty(jsonData))
                 fileExpenses = JsonSerializer.Deserialize<List<Expense>>(jsonData);
@@ -213,7 +213,7 @@ namespace ExpenseTracker.Services
 
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

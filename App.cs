@@ -1,5 +1,4 @@
-﻿using ExpenseTracker.Model;
-using ExpenseTracker.Services;
+﻿using ExpenseTracker.Services;
 
 namespace ExpenseTracker
 {
@@ -8,7 +7,6 @@ namespace ExpenseTracker
         public void Run()
         {
             var isRunning = true;
-            var expenseList = new List<string>();
             var commands = new List<string>();
 
             while (isRunning)

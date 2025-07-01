@@ -11,6 +11,9 @@ namespace ExpenseTracker
 
             while (isRunning)
             {
+                Utility.Utility.WelcomeUser();
+                Console.WriteLine();
+
                 Console.Write("Enter command: ");
                 var input = Console.ReadLine() ?? string.Empty;
 

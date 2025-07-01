@@ -34,6 +34,12 @@ namespace ExpenseTracker.Utility
             Console.ResetColor();
         }
 
+        public static void WelcomeUser()
+        {
+            Console.WriteLine("Welcome to your Expense Tracker App!");
+            Console.WriteLine("Track your spending, manage your budget, and stay in control of your finances.");
+        }
+
         public static void CreateExpenseTable(List<Expense> expenses)
         {
             // Print table header

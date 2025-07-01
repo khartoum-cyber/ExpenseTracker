@@ -6,8 +6,8 @@ namespace ExpenseTracker.Services
 {
     internal class ExpenseService : IExpenseService
     {
-        private static string fileName = "myExpenses.json";
-        private static string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+        private static readonly string FileName = "myExpenses.json";
+        private static readonly string FilePath = Path.Combine(Directory.GetCurrentDirectory(), FileName);
 
         public int Add(string description, double amount, string category)
         {
@@ -32,7 +32,7 @@ namespace ExpenseTracker.Services
 
                     expenseList.Add(expense);
                     var updatedExpenseList = JsonSerializer.Serialize<List<Expense>>(expenseList);
-                    File.WriteAllText(filePath, updatedExpenseList);
+                    File.WriteAllText(FilePath, updatedExpenseList);
 
                     return expense.Id;
                 }
@@ -86,7 +86,7 @@ namespace ExpenseTracker.Services
                     expensesFromFile.Add(updatedExpense);
 
                     var updatedExpenseList = JsonSerializer.Serialize(expensesFromFile);
-                    File.WriteAllText(filePath, updatedExpenseList);
+                    File.WriteAllText(FilePath, updatedExpenseList);
 
                     return updatedExpense.Id;
                 }
@@ -114,7 +114,7 @@ namespace ExpenseTracker.Services
                     expensesFromFile.Remove(expenseToBeRemoved);
 
                     var updatedExpenseList = JsonSerializer.Serialize(expensesFromFile);
-                    File.WriteAllText(filePath, updatedExpenseList);
+                    File.WriteAllText(FilePath, updatedExpenseList);
 
                     return expenseToBeRemoved.Id;
                 }
@@ -192,7 +192,7 @@ namespace ExpenseTracker.Services
         private static List<Expense> GetAllExpensesFromFile()
         {
             List<Expense>? fileExpenses = new List<Expense>();
-            var jsonData = File.ReadAllText(filePath);
+            var jsonData = File.ReadAllText(FilePath);
             if (!string.IsNullOrEmpty(jsonData))
                 fileExpenses = JsonSerializer.Deserialize<List<Expense>>(jsonData);
 
@@ -207,8 +207,8 @@ namespace ExpenseTracker.Services
 
                 if (!fileExists)
                 {
-                    using FileStream fs = File.Create(filePath);
-                    Console.WriteLine($"File {fileName} created successfully.");
+                    using FileStream fs = File.Create(FilePath);
+                    Console.WriteLine($"File {FileName} created successfully.");
                 }
 
                 return true;
@@ -219,7 +219,7 @@ namespace ExpenseTracker.Services
             }
         }
 
-        private static bool CheckIfFileExists() => File.Exists(filePath);
+        private static bool CheckIfFileExists() => File.Exists(FilePath);
 
         private int GetId()
         {
